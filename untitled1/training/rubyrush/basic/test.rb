@@ -1,0 +1,1 @@
+print('LOFTBLOG'[4..8])
