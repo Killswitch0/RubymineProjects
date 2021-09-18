@@ -47,8 +47,8 @@ puts $x
 
 
 fib(4) #рекурсивня функция Фибоначчи
-#= fib(3) + fib(22)
-#= fib(22) + fib(1) + fib(1) + fib(0)
+#= fib(3) + fib(2)
+#= fib(2) + fib(1) + fib(1) + fib(0)
 # = fib(1) + fib(0) + fib(1) + fib(1) + fib(0)
 
 p '_______'
