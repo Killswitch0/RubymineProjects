@@ -1,10 +1,18 @@
 # Класс-родитель Товар, у которого есть цена и остаток на складе. От этого
 # класса мы будем наследовать все другие товары.
 class Product
-  # У любого экземпляра класса Товар будут как минимум две переменные — цена
-  # и количество единиц товара на складе
+  # Чтобы цену и остаток товара можно было менять прямо по ссылке экземпляра:
+  #
+  # product.price = 100
+  #
+  # Мы должны объявить методы-сеттеры для каждой из переменных.
+  #
+  # def price=(price)
+  #   @price = price
+  # end
+  #
+  # Также это можно сделать с помощью attr_accessor
   attr_accessor :price, :amount
-
 
   # Конструктор товара записывает, сколько стоит товар и сколько осталось
   def initialize(options)
@@ -13,11 +21,13 @@ class Product
   end
 
   def to_string
-    # to do
+    "#{@price} грн. (осталось #{@amount})"
   end
 
-  def update(params)
-    @price = params[:price] if params[:price]
-    @amount = params[:amount] if params[:amount]
+  # Метод update у родителя обновляет только цену и количество товара, если эти
+  # ключи были переданы в ассоциативном массиве на вход
+  def update(options)
+    @price = options[:price] if options[:price]
+    @amount = options[:amount] if options[:amount]
   end
 end

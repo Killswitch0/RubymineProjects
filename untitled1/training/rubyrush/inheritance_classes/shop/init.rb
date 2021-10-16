@@ -8,17 +8,31 @@ require_relative 'book'
 leon = Movie.new(price: 250, amount: 5)
 
 # Выведем информацию о товаре в консоль
-puts "Фильм Леон стоит: #{leon.price}, количество #{leon.amount} штук"
+puts "Фильм Леон стоит: #{leon.price}, количество #{leon.amount} штук \n\n"
 
-book = Book.new(name: "Под Куполом", genre: "фантастика", author: "Стивен Кинг", price: 200, amount: 3)
+# Создадим несколько продуктов и поменяем их с помощью сеттеров и метода update
+book = Book.new(name: "Под Куполом",
+                genre: "фантастика",
+                author: "Стивен Кинг",
+                price: 200,
+                amount: 3)
+
+film = Movie.new(name: "Матрица",
+                   genre: "кибер-панк",
+                   author: "Сестры Вачовски",
+                   price: 300,
+                   amount: 1)
 
 book.to_string
+book.price = 960
+book.update(price: 1100)
+book.to_string
 
-film = Movie.new(name: "Матрица", genre: "кибер-панк", author: "Сестры Вачовски", price: 300, amount: 1)
+puts
+
 film.to_string
 film.price = 650
 film.to_string
-
 film.update(price: 1000)
 film.to_string
 
