@@ -18,10 +18,10 @@ book = Book.new(name: "Под Куполом",
                 amount: 3)
 
 film = Movie.new(name: "Матрица",
-                   genre: "кибер-панк",
-                   author: "Сестры Вачовски",
-                   price: 300,
-                   amount: 1)
+                 genre: "кибер-панк",
+                 author: "Сестры Вачовски",
+                 price: 300,
+                 amount: 1)
 
 book.to_string
 book.price = 960
