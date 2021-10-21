@@ -44,7 +44,12 @@ puts "_____________________________\n\n"
 film2 = Movie.from_file("data/films/01.txt")
 film2.to_string
 
-Product.from_file("data/films/01.txt")
+# Пытаемся вызвать метод from_file у класса Product и ловим ошибку
+begin
+  Product.from_file("data/films/01.txt")
+rescue
+  puts "Метод класса Product.form_file не реализован"
+end
 
 
 
