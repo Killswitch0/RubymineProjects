@@ -25,6 +25,7 @@ film = Movie.new(name: "Матрица",
 
 book.to_string
 book.price = 960
+book.to_string
 book.update(price: 1100)
 book.to_string
 
@@ -35,4 +36,11 @@ film.price = 650
 film.to_string
 film.update(price: 1000)
 film.to_string
+
+puts "_____________________________\n\n"
+
+film2 = Movie.from_file("data/films/01.txt")
+film2.to_string
+
+
 

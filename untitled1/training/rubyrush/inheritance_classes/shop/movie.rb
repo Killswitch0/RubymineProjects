@@ -13,8 +13,19 @@ class Movie < Product
     @author = options[:author]
   end
 
+  def self.from_file(file_path)
+    lines = File.readlines(file_path).map { |l| l.chomp  }
+
+    self.new(name: lines[0],
+             genre: lines[1],
+             author: lines[2],
+             price: lines[3].to_i,
+             amount: lines[4].to_i
+    )
+  end
+
   def to_string
-    puts "Фильм: #{@name}. Жанр: #{@genre}. Автор: #{@author}. #{@price} грн. #{super}"
+    puts "Фильм: #{@name}. Жанр: #{@genre}. Автор: #{@author}.#{super}"
   end
 
   # Метод update у ребенка обновляет специфичные для ребенка поля и вызывает

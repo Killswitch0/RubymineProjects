@@ -21,7 +21,7 @@ class Product
   end
 
   def to_string
-    "#{@price} грн. (осталось #{@amount})"
+    " #{@price} грн. (осталось #{@amount})"
   end
 
   # Метод update у родителя обновляет только цену и количество товара, если эти
