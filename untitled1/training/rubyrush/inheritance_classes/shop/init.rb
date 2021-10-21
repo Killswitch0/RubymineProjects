@@ -47,8 +47,8 @@ film2.to_string
 # Пытаемся вызвать метод from_file у класса Product и ловим ошибку
 begin
   Product.from_file("data/films/01.txt")
-rescue
-  puts "Метод класса Product.form_file не реализован"
+rescue NotImplementedError
+  puts "[ Метод класса Product.form_file не реализован ]"
 end
 
 
