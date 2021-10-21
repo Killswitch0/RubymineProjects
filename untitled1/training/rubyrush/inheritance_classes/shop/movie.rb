@@ -3,7 +3,9 @@ class Movie < Product
   # Аналогично классу Product мы объями сеттеры и геттеры для переменных
   # экземпляра класса Film с помощью attr_accessor, чтобы их можно было менять
   # из основной программы.
-  attr_accessor :genre, :author, :name
+  attr_accessor :genre,
+                :author,
+                :name
 
   def initialize(options)
     super
@@ -13,6 +15,9 @@ class Movie < Product
     @author = options[:author]
   end
 
+  # Метод класса from_file считывает данные о фильме из файла, путь к которому
+  # ему передали в качестве параметра и передает их на вход своему же
+  # конструктору с нужными ключами.
   def self.from_file(file_path)
     lines = File.readlines(file_path).map { |l| l.chomp  }
 

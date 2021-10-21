@@ -2,7 +2,9 @@ class Book < Product
   # Аналогично классу Product мы объявим сеттеры и геттеры для переменных
   # экземпляра класса Book с помощью attr_accessor, чтобы их можно было менять
   # из основной программы.
-  attr_accessor :name, :genre, :author
+  attr_accessor :name,
+                :genre,
+                :author
 
   def initialize(options)
     super
@@ -12,6 +14,9 @@ class Book < Product
     @author = options[:author]
   end
 
+  # Метод класса from_file считывает данные о книге из файла, путь к которому
+  # ему передали в качестве параметра и передает их на вход своему же
+  # конструктору с нужными ключами.
   def self.from_file(file_path)
     lines = File.readlines(file_path).map { |l| l.chomp  }
 

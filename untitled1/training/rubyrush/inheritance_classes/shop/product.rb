@@ -12,7 +12,8 @@ class Product
   # end
   #
   # Также это можно сделать с помощью attr_accessor
-  attr_accessor :price, :amount
+  attr_accessor :price,
+                :amount
 
   # Конструктор товара записывает, сколько стоит товар и сколько осталось
   def initialize(options)
@@ -29,5 +30,9 @@ class Product
   def update(options)
     @price = options[:price] if options[:price]
     @amount = options[:amount] if options[:amount]
+  end
+
+  def self.from_file(file_path)
+    # to do
   end
 end
