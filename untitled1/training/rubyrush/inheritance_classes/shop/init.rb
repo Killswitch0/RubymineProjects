@@ -15,13 +15,15 @@ book = Book.new(name: "Под Куполом",
                 genre: "фантастика",
                 author: "Стивен Кинг",
                 price: 200,
-                amount: 3)
+                amount: 3
+)
 
 film = Movie.new(name: "Матрица",
                  genre: "кибер-панк",
                  author: "Сестры Вачовски",
                  price: 300,
-                 amount: 1)
+                 amount: 1
+)
 
 book.to_string
 book.price = 960
