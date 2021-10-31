@@ -13,3 +13,4 @@ if defined?(b)
 else
   puts "Переменная 'b' не определена"
 end
+
