@@ -14,7 +14,7 @@ collection = ProductCollection.from_dir(File.dirname(__FILE__ ) + '/data')
 
 # Сортируем продукты по возрастанию цены с помощью метода sort! экземпляра
 # класса ProductCollection
-collection.sort!(by: :price)
+collection.sort!(by: :amount, order: :asc)
 
 # Получаем массив продуктов методом to_a и выводим каждый на экран, передавая
 # его методу puts в качестве аргумента.

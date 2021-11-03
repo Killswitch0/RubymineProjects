@@ -66,9 +66,9 @@ class ProductCollection
     when :title
       @products.sort_by! { |product| product.to_s }
     when :price
-      @products.sort_by! { |product| product.price }
+      @products.sort_by! { |product| product.price.to_i }
     when :amount
-      @products.sort_by! { |product| product.amount }
+      @products.sort_by! { |product| product.amount.to_i }
     else
       # type code here
     end

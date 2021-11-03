@@ -30,7 +30,7 @@ class Film < Product
   end
 
   def to_s
-    "Фильм #{@title}, жанр: #{@genre}, режиссер: #{@director}, #{super}"
+    "Фильм: #{@title}, жанр: #{@genre}, режиссер: #{@director}, #{super}"
   end
 
   # Метод update у ребенка обновляет специфичные для ребенка поля и вызывает

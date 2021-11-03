@@ -76,10 +76,10 @@ class ProductCollection
       @products.sort_by! { |product| product.to_s }
     when :price
       # Если запросили сортировку по цене
-      @products.sort_by! { |product| product.price }
+      @products.sort_by! { |product| product.price.to_i }
     when :amount
       # Если запросили сортировку по количеству
-      @products.sort_by! { |product| product.amount }
+      @products.sort_by! { |product| product.amount.to_i }
     end
 
     # Если запросили сортировку по возрастанию
