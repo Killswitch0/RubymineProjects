@@ -8,7 +8,7 @@ class Book < Product
   # ему передали в качестве параметра и передает их на вход своему же
   # конструктору с нужными ключами.
   def self.from_file(file_path)
-    lines = File.readlines(file_path, encoding: 'UTF-8').map { |l| l.chomp }
+    lines = File.readlines(file_path).map { |l| l.chomp }
 
     self.new(
       title: lines[0],
