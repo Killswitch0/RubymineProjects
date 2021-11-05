@@ -5,7 +5,7 @@ require 'date'
 # Запишем путь к файлу, который лежит в том же каталоге, что и программа
 file_name = File.dirname(__FILE__) + '/my_expenses.xml'
 
-# Если файл не найдет, завершаем программу
+# Если файл не найден, завершаем программу
 unless File.exist?(file_name)
   abort "Прошу прощения, файл #{file_name} не найден."
 end
@@ -29,7 +29,7 @@ file.close
 #   ...
 # }
 #
-amount_by_day = Hash.new
+amount_by_day = {}
 
 # Выбираем из элементов документа все тэги <expense> внутри тега <expenses> и в
 # цикле проходимся по ним.
@@ -61,6 +61,7 @@ sum_by_month = {}
 # В цикле по всем датам хэша amount_by_day накопим в хэше sum_by_month значения
 # потраченных сумм каждого дня
 amount_by_day.keys.sort.each do |key|
+
   # key.strftime('%B %Y') вернет одинаковую строку для всех дней одного месяца
   # поэтому можем использовать ее как уникальный для каждого месяца ключ
   sum_by_month[key.strftime("%B %Y")] ||= 0
