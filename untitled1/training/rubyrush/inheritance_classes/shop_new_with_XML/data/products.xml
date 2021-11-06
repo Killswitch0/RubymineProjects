@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<products>
+  <product price="1240" amount="5">
+    <film title="Троя" genre="исторический" director="Вольфганг Петерсен"/>
+  </product>
+  <product price="1320" amount="3">
+    <film title="Матрица" genre="кибер-панк" director="Сестры Вачовски"/>
+  </product>
+  <product price="900" amount="6">
+    <film title="Отступники" genre="криминальный боевик" director="Мартин Скорсезе"/>
+  </product>
+  <product price="1730" amount="2">
+    <film title="Бесславный ублюдки" genre="военный" director="Квентин Торантино"/>
+  </product>
+  <product price="1950" amount="8">
+    <book title="Под куполом" genre="фантастика" author="Стивен Кинг"/>
+  </product>
+  <product price="2000" amount="1">
+    <book title="Оно" genre="ужасы" author="Стивен Кинг"/>
+  </product>
+</products>
