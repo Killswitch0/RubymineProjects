@@ -5,8 +5,17 @@ require_relative 'product'
 require_relative 'book'
 require_relative 'film'
 
-products = Product.read_from_xml('data/products.xml')
+product = Product.read_from_xml('data/products.xml')
 
-puts products
+Product.showcase(product)
+
+
+
+
+
+
+
+
+
 
 

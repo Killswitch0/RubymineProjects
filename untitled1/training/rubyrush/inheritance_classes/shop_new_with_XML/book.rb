@@ -4,7 +4,7 @@
 class Book < Product
 
   def to_s
-    "Книга: #{@title}, жанр: #{@genre}, автор: #{@author}, #{super}"
+    "Книга: #{@title}, жанр: #{@genre}, автор: #{@author}. цена #{super}"
   end
 
   # Метод update у ребенка обновляет специфичные для ребенка поля и вызывает

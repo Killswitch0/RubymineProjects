@@ -21,6 +21,16 @@ class Product
     @amount = amount
   end
 
+  def self.showcase(products)
+    puts "Вот список товаров:"
+
+    products.each_with_index do |product, index|
+      index += 1
+
+      puts "#{index}: #{product.to_s}"
+    end
+  end
+
   def self.read_from_xml(file_name)
     file_path = File.dirname(__FILE__ ) + "/" + file_name
 
@@ -43,7 +53,18 @@ class Product
         product = Film.new(price, amount)
         product.update(
           title: film_node.attributes["title"],
-          director: film_node.attributes["director"]
+          director: film_node.attributes["director"],
+          genre: film_node.attributes["genre"],
+          year: film_node.attributes["year"]
+        )
+      end
+
+      product_node.each_element("book") do |book_node|
+        product = Book.new(price, amount)
+        product.update(
+          title: book_node.attributes["title"],
+          author: book_node.attributes["author"],
+          genre: book_node.attributes["genre"]
         )
       end
 
@@ -52,7 +73,6 @@ class Product
 
     return result
   end
-
 
   def to_s
     "#{@price} грн. (осталось: #{@amount})"
@@ -65,4 +85,6 @@ class Product
     @amount = options[:amount] if options[:amount]
   end
 end
+
+
 

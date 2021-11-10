@@ -4,7 +4,7 @@
 class Film < Product
 
   def to_s
-    "Фильм: #{@title}, жанр: #{@genre}, режиссер: #{@director}, #{super}"
+    "Фильм: #{@title}, жанр: #{@genre}, режиссер: #{@director}, год: #{@year}. цена #{super}"
   end
 
   # Метод update у ребенка обновляет специфичные для ребенка поля и вызывает
@@ -15,6 +15,7 @@ class Film < Product
     @title = options[:title] if options[:title]
     @genre = options[:genre] if options[:genre]
     @director = options[:director] if options[:director]
+    @year = options[:year] if options[:year]
   end
 end
 
