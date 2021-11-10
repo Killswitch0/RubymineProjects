@@ -8,6 +8,9 @@ require_relative 'film'
 total_price = 0
 choice = nil
 
+# Всё, что мы поменяем, это то, как мы получаем массив продуктов
+# Раньше мы генерили его руками, теперь этим будет заниматься статический метод
+# read_from_xml, которому мы будем передавать относительный путь к файлу
 products = Product.read_from_xml('data/products.xml')
 
 while choice != "x"
