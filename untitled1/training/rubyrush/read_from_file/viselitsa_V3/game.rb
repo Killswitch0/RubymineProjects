@@ -1,5 +1,9 @@
 class Game
-  attr_reader :errors
+  attr_reader :letters,
+              :errors,
+              :good_letters,
+              :bad_letters,
+              :status
 
   def initialize(slovo)
     @letters = get_letters(slovo)
@@ -63,21 +67,5 @@ class Game
         @status = -1
       end
     end
-  end
-
-  def letters
-    @letters
-  end
-
-  def good_letters
-    @good_letters
-  end
-
-  def bad_letters
-    @bad_letters
-  end
-
-  def status
-    @status
   end
 end
