@@ -39,12 +39,12 @@ wish_date = Date.parse(deadline)
 
 # Добавим к корневому элементу нашей XML-структуры ещё один тег wish и добавим
 # к нему аттрибут date  со строкой даты в нужном формате
-wish = doc.root.add_element 'wishes', {
+wish = doc.root.add_element 'wish', {
   'date' => wish_date.strftime("%d.%m.%Y")
 }
 
 # Добавим текст желания к тексту элемента с пом. метода text
-wish_text.text = wish
+wish.text = wish_text
 
 #Снова откроем файл, но уже на запись и запишем туда все данные в нужном
 # формате
@@ -52,4 +52,26 @@ file = File.new(file_name, "w:UTF-8")
 doc.write(file, 2)
 file.close
 
+file = File.new(file_name, "r:UTF-8")
+doc = REXML::Document.new(file)
+
+
+time_today = Date.today
+
+doc.elements.each("wishes/wish") do |item|
+  date_of_wish = Date.parse(item.attributes["date"])
+  date_of_wish.strftime("%d.%m.%Y")
+
+  current_wish = item.text
+
+  if date_of_wish <= time_today
+    puts "#{current_wish} Какое-то из желаний уже сбылось :)"
+  else
+    puts "#{current_wish} А вот какое-то не сбылось..."
+  end
+end
+
+
+
 puts "Запись успешно сохранена в сундук :)"
+
