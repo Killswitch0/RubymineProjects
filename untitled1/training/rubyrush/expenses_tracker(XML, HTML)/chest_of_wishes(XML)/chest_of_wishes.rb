@@ -58,6 +58,10 @@ doc = REXML::Document.new(file)
 
 time_today = Date.today
 
+true_wishes = []
+false_wishes = []
+
+
 doc.elements.each("wishes/wish") do |item|
   date_of_wish = Date.parse(item.attributes["date"])
   date_of_wish.strftime("%d.%m.%Y")
@@ -65,13 +69,28 @@ doc.elements.each("wishes/wish") do |item|
   current_wish = item.text
 
   if date_of_wish <= time_today
-    puts "#{current_wish} Какое-то из желаний уже сбылось :)"
+    true_wishes << current_wish.strip
   else
-    puts "#{current_wish} А вот какое-то не сбылось..."
+     false_wishes << current_wish.strip
   end
 end
 
-
-
 puts "Запись успешно сохранена в сундук :)"
+
+index = 1
+
+puts "Желания, которые успели сбыться:"
+true_wishes.each do |wish|
+  puts "#{index}: #{wish}"
+  index += 1
+end
+
+puts
+
+index = 1
+puts "Желания, которые сбудуться:"
+false_wishes.each do |wish|
+  puts "#{index}: #{wish}"
+  index += 1
+end
 
