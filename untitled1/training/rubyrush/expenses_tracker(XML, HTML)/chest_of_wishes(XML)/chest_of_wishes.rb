@@ -20,8 +20,8 @@ unless File.exist?(file_name)
   end
 end
 
-# Теперь мы можем быть уверены, что файл на диске внужном месте точно есть. Если
-# он был — хорошо, если нет — мы его создали, без данных но с нужной нам
+# Теперь мы можем быть уверены, что файл на диске в нужном месте точно есть. Если
+# он был — хорошо, если нет — мы его создали, без данных, но с нужной нам
 # структурой. В любом случае считываем из него содержимое и строим из него
 # структуру XML с помощью нашего любимого парсера REXML
 file = File.new(file_name, "r:UTF-8")
@@ -52,45 +52,72 @@ file = File.new(file_name, "w:UTF-8")
 doc.write(file, 2)
 file.close
 
-file = File.new(file_name, "r:UTF-8")
-doc = REXML::Document.new(file)
+puts "Запись успешно сохранена в сундук :)"
 
-
+#
+#
+#
+#
+#
+# !!!!!!!!! В ДАННОМ КОДЕ СОДЕРЖИТСЯ РЕАЛИЗАЦИЯ СПИСКА ЖЕЛАНИЙ !!!!!!!!!
+# на 2 категори, и последовательный их вывод: которые сбудутся; которым предстоит сбыться.
+#
+# Создадим переменную с текущей датой
 time_today = Date.today
 
-true_wishes = []
-false_wishes = []
+# В двух переменных мы создадим два массива, в которые будет сортировать желания:
+# сбывшиеся/не сбывшиеся
+come_true_wishes = []
+lost_wishes = []
 
-
+# Выбираем из элементов документа все тэги <wish> внутри тега <wishes> и в
+# цикле проходимся по ним.
 doc.elements.each("wishes/wish") do |item|
+
+  # В локальную переменную date_of_wish запишем дату исполнения желания: Date.parse создает из
+  # строки объект класса Date.
   date_of_wish = Date.parse(item.attributes["date"])
+
+  # Метод strftime("%d.%m.%Y") вернет нам дату в формате ДД.ММ.ГГГГ
   date_of_wish.strftime("%d.%m.%Y")
 
+  # в current_wish поместим текст желания. Метод text в предоставляет нам текст,
+  # находищийся внутри тэга <wish>
   current_wish = item.text
 
+  # В данном условии мы проверяем: если дата исполнения
+  # загаданного желания <= сегодняшней дате, то в массив come_true_wishes << текст желания current_wish.strip
+  # метод strip в конце удаляет любые невидимые символы переноса строки, отступы и т.п.
   if date_of_wish <= time_today
-    true_wishes << current_wish.strip
+    come_true_wishes << current_wish.strip
   else
-     false_wishes << current_wish.strip
+    # В противном случае текст желания добавляется в массив lost_wishes
+    lost_wishes << current_wish.strip
   end
 end
 
-puts "Запись успешно сохранена в сундук :)"
 
-index = 1
-
+puts "\n________________________________\n"
 puts "Желания, которые успели сбыться:"
-true_wishes.each do |wish|
-  puts "#{index}: #{wish}"
-  index += 1
+
+# Переменная, куда будет добавлятся число 1 после каждой итерации цикла
+index = 1
+# В цикле проходимся по всем элементам массива come_true_wishes
+come_true_wishes.each do |wish|
+  puts "#{index}: #{wish}" # последовательно выводим список желаний, благодаря переменной index
+
+  index += 1 # с каждой итерацией увеличиваем переменную index
 end
 
-puts
-
-index = 1
+puts "\n___________________________\n"
 puts "Желания, которые сбудуться:"
-false_wishes.each do |wish|
+
+# Аналогичная ситуация
+index = 1
+
+lost_wishes.each do |wish|
   puts "#{index}: #{wish}"
+
   index += 1
 end
 
