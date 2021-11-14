@@ -55,11 +55,11 @@ expenses = doc.elements.find('expenses').first
 
 # И добавим элемент командой add_element. Все аттрибуты пропишем с помощью
 # параметра, передаваемого в виде ассоциативного массива
-expense = expenses.add_element 'expense', {
+expense = expenses.add_element('expense', {
   'date' => expense_date.to_s,
   'category' => expense_category,
   'amount' => expense_amount
-}
+})
 
 # А содержимое элемента меняется вызовом метода-сеттера text=
 expense.text = expense_text

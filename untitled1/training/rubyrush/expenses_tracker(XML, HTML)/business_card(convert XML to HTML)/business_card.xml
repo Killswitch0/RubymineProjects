@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<business_card>
+  <first_name>Джейсон</first_name>
+  <second_name>Артёмович</second_name>
+  <last_name>Стейтэм</last_name>
+  <phone>0669001001</phone>
+  <email>js@gmail.com</email>
+  <skills>Senior_Ruby_Dev</skills>
+  <photo>https://celebrity.fm/wp-content/uploads/2021/08/Is-Jason-Statham-tough-in-real-life-732x366.jpg</photo>
+</business_card>
