@@ -30,7 +30,7 @@ html.add_element('html', {'lang' => 'ru'})
 # Добавим элемент head, в котором в теге meta опишем кодировку
 html.root.add_element('head').add_element('meta', 'charset' => 'UTF-8')
 
-# Наконец, создадим элемент body, в который будет добавлять содержимое страницы
+# Наконец, создадим элемент body, в который будем добавлять содержимое страницы
 body = html.root.add_element('body')
 
 # Добавляем фотку

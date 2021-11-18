@@ -16,6 +16,12 @@ products = Product.read_from_xml('data/products.xml')
 while choice != "x"
   Product.showcase(products)
 
+  # to_i в конце для перевода строки в число, где оно выступает номером
+  # для выбора соответствующего продукта в массиве.
+  #
+  # Поскольку нумерация списка продуктов начинается с 1
+  # choice -= 1 нужен для выбора элемента в порядке индексации массива,
+  # а именно с 0.
   choice = STDIN.gets.chomp.to_i
   choice -= 1
 
