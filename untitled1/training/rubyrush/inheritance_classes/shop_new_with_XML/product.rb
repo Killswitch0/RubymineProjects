@@ -53,7 +53,7 @@ class Product
       @price
     else
       puts "Товар закончился: #{@amount}"
-      @price
+      0
     end
   end
 
