@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?> 
+<expenses>
+  <expense date='5.11.2021' category='образование' amount='315'>
+     Подписка изучения англ.языка в программе Duolingo 
+  </expense>
+  <expense date='5.11.2021' category='музыка' amount='70'>
+     Семейная подписка apple music 
+  </expense>
+  <expense date='6.12.2021' category='еда' amount='530'>
+     Доставка McDonalds домой 
+  </expense>
+  <expense date='2021-11-10' category='Образование' amount='30000'>
+     Курс по Ruby 
+  </expense>
+  <expense amount='100000000' category='Важные покупки' date='2022-12-10'>
+    На машину
+  </expense>
+</expenses>

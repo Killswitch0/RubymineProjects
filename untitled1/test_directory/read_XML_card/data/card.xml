@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<business_card>
+  <first_name>Макс</first_name>
+  <second_name>Викторович</second_name>
+  <last_name>Пэйн</last_name>
+  <phone>077077712</phone>
+  <email>mp@gmail.com</email>
+  <skills>The most powerful ruby engineer</skills>
+</business_card>
