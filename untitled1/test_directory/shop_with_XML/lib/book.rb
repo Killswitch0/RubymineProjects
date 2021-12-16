@@ -5,7 +5,7 @@ class Book < Product
   end
 
   def read_from_console
-    puts "Укажите книги..."
+    puts "Укажите название книги..."
     @name = STDIN.gets.chomp
 
     puts "Укажите жанр..."

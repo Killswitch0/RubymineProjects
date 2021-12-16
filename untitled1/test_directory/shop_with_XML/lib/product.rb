@@ -66,7 +66,7 @@ class Product
   end
 
   def to_xml
-    el = REXML::Element('product')
+    el = REXML::Element.new('product')
     el.attributes['price'] = @price
     el.attributes['amount'] = @amount
     el
@@ -82,8 +82,11 @@ class Product
     file.close
 
     file = File.new(file_path, "w:UTF-8")
+    doc.root.add_element(self.to_xml)
     doc.write(file, 2)
     file.close
+
+    puts "Продукт успешно сохранен!"
   end
 
   def self.product_types

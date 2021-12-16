@@ -18,7 +18,7 @@ while choice != 'x'
   if choice != 'x' && choice.to_i < products.size && choice.to_i >= 0
     product = products[choice.to_i]
     total_price += product.buy
-  else
+  elsif choice == 'x'
     abort "Спасибо за покупки, с вас: #{total_price}"
   end
 end

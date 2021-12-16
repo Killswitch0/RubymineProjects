@@ -1,15 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version='1.0' encoding='UTF-8'?> 
 <products>
-  <product price="1150" amount="3">
-    <film title="Под Куполом" genre="фантастика" year="2000" director="Стивен Кинг"/>
+  <product price='1150' amount='3'>
+    <film title='Под Куполом' genre='фантастика' year='2000' director='Стивен Кинг'/>
   </product>
-  <product price="1560" amount="4">
-    <film title="Однажды в Голливуде" genre="true story" year="2019" director="Квентин Торантино"/>
+  <product price='1560' amount='4'>
+    <film title='Однажды в Голливуде' genre='true story' year='2019' director='Квентин Торантино'/>
   </product>
-  <product price="1200" amount="1">
-    <film title="Троя" genre="исторический" year="2003" director="Какой-то режиссер"/>
+  <product price='1200' amount='1'>
+    <film title='Троя' genre='исторический' year='2003' director='Какой-то режиссер'/>
   </product>
-  <product price="1600" amount="8">
-    <film title="Матрица" genre="фантастика" year="1999" director="Сестры Вачовски"/>
+  <product price='1600' amount='8'>
+    <film title='Матрица' genre='фантастика' year='1999' director='Сестры Вачовски'/>
+  </product>
+  <product price='22222' amount='22'>
+    <film title='Дневник' genre='Драма' year='2001' director='Уилли Бейлиш'/>
   </product>
 </products>
