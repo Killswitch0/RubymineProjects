@@ -1,0 +1,15 @@
+{
+  "languages":
+  {
+    "SQL": 15,
+    "Javascript": 98,
+    "Ruby": 35,
+    "C": 25,
+    "C++": 79,
+    "PHP": 65,
+    "GO": 55,
+    "SWIFT": 50,
+    "Java": 85,
+    "Python": 100
+  }
+}

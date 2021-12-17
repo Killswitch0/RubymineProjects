@@ -11,7 +11,7 @@ signs = JSON.parse(file)
 puts "Укажите дату в формате ДД.ММ, например 24.02"
 user_input_date = STDIN.gets.chomp
 
-# Создадим объект user_birth_date класса Date и запишем в него дату рождения. Нам не
+# Создадим объект user_date класса Date и запишем в него дату рождения. Нам не
 # важен год, поэтому везде будем ставить 2000-й, чтобы метод Parse мог взять
 # конкретную дату.
 user_birth_date = Date.parse(user_input_date + '.2000')
