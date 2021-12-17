@@ -1,0 +1,26 @@
+{
+  "table":
+  {
+    "H": {
+      "number": 1,
+      "name": "Водород",
+      "density": 0.000084,
+      "year": 1766,
+      "discoverer": "Кавендиш"
+    },
+    "He": {
+      "number": 2,
+      "name": "Гелий",
+      "density": 4.0026,
+      "year": 1868,
+      "discoverer": "Локьер"
+    },
+    "Li": {
+      "number": 3,
+      "name": "Литий",
+      "density": 6.94,
+      "year": 1817,
+      "discoverer": "Арфведсон"
+    }
+  }
+}
