@@ -1,6 +1,10 @@
+require 'sqlite3'
+
 # Базовый класс «Запись» — здесь мы определим основные методы и свойства,
 # общие для всех типов записей.
 class Post
+
+  @@SQLITE_DB_FILE = 'notepad.sqlite'
 
   # Метод post_types класса Post, возвращает всех известных ему детей класса
   # Post в виде массива классов.
@@ -9,7 +13,7 @@ class Post
   # метод экземпляра класса, а метод самого класса (их ещё часто называют
   # статические методы).
   def self.post_types
-    [Memo, Task, Link]
+    {"Memo" => Memo, "Task" => Task, "Link" => Link}
   end
 
   # Строго говоря этот метод self.types не очень хорош — код родительского
@@ -29,8 +33,8 @@ class Post
   # Метод create класса Post динамически (в зависимости от параметра) создает
   # объект нужного класса (Memo, Task или Link) из набора возможных детей,
   # получая список с помощью метода post_types, объявленного выше.
-  def self.create(type_index)
-    post_types[type_index].new
+  def self.create(type)
+    post_types[type].new
   end
 
   def initialize
@@ -60,5 +64,33 @@ class Post
     file_name = @created_at.strftime("#{self.class.name}_%y-%m-%d_%H-%M_%S.txt")
 
     current_path + "/" + file_name
+  end
+
+  def save_to_db
+    db = SQLite3::Database.open(@@SQLITE_DB_FILE)
+    db.results_as_hash = true
+
+    db.execute(
+      "INSERT INTO posts (" +
+        to_db_hash.keys.join(',') +
+        ")" +
+        " VALUES (" +
+        ('?,' * to_db_hash.keys.size).chomp(',') +
+        ")",
+      to_db_hash.values
+    )
+
+    insert_row_id = db.last_insert_row_id
+
+    db.close
+
+    insert_row_id
+  end
+
+  def to_db_hash
+    {
+      'type' => self.class.name,
+      'created_at' => @created_at.to_s
+    }
   end
 end

@@ -43,4 +43,12 @@ class Memo < Post
     # строчки с датой создания заметки.
     @text.unshift(time_string)
   end
+
+  def to_db_hash
+    super.merge(
+      {
+        'text' => @text.join("\n\r")
+      }
+    )
+  end
 end
