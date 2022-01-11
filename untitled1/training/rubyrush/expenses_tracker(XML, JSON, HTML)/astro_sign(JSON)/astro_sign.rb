@@ -33,7 +33,7 @@ signs.each do |key, sign|
   # У объектов класса Date определены методы больше и меньше. Они позволяют
   # сравнивать даты как числа. Если день рождения пользователя попадает между
   # датами какого-то знака зодиака, записываем результат в переменную user_sign.
-  user_sign = sign if dates.first <= user_birth_date && dates.last <= user_birth_date
+  user_sign = sign if dates.first <= user_birth_date && dates.last >= user_birth_date
 end
 
 puts user_sign['dates']
