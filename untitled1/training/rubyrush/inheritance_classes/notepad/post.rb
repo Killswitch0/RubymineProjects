@@ -37,6 +37,22 @@ class Post
     post_types[type].new
   end
 
+  def self.find(limit, type, id)
+    db = SQLite3::Database.open(@@SQLITE_DB_FILE)
+
+    #  1. конкретная запись
+    if !id.nil?
+      db.results_as_hash = true
+
+      result = db.execute("SELECT * FROM posts WHERE rowid = ?", id )
+
+      result = result[0] if result.is_a? Array
+    else
+      #  2. вернуть таблицу записей
+
+    end
+  end
+
   def initialize
     @created_at = Time.now
     @text = []
