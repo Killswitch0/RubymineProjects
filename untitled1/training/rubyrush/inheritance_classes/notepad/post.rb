@@ -1,9 +1,14 @@
+# Во-первых, сразу подключим sqlite3
+# Подключать библиотеки лучше всего в тех файлах/классах, который их используют
 require 'sqlite3'
 
 # Базовый класс «Запись» — здесь мы определим основные методы и свойства,
 # общие для всех типов записей.
 class Post
 
+  # Статическое поле класса или class variable
+  # аналогично статическим методам принадлежит всему классу в целом
+  # и доступно незвисимо от созданных объектов
   @@SQLITE_DB_FILE = 'notepad.sqlite'
 
   # Метод post_types класса Post, возвращает всех известных ему детей класса
@@ -115,22 +120,25 @@ class Post
     current_path + "/" + file_name
   end
 
+  # Наконец, вот он метод, сохраняющий состояние объекта в базу данных
   def save_to_db
-    db = SQLite3::Database.open(@@SQLITE_DB_FILE)
-    db.results_as_hash = true
+    db = SQLite3::Database.open(@@SQLITE_DB_FILE) # открываем "соединение" к базе SQLite
+    db.results_as_hash = true # настройка соединения к базе, он результаты из базы преобразует в Руби хэши
 
+    # запрос к базе на вставку новой записи в соответствии с хэшом, сформированным дочерним классом to_db_hash
     db.execute(
       "INSERT INTO posts (" +
-        to_db_hash.keys.join(',') +
+        to_db_hash.keys.join(',') + # все поля, перечисленные через запятую
         ")" +
         " VALUES (" +
-        ('?,' * to_db_hash.keys.size).chomp(',') +
+        ('?,' * to_db_hash.keys.size).chomp(',') + # строка из заданного числа _плейсхолдеров_ ?,?,?...
         ")",
-      to_db_hash.values
+      to_db_hash.values # массив значений хэша, которые будут вставлены в запрос вместо _плейсхолдеров_
     )
 
     insert_row_id = db.last_insert_row_id
 
+    # закрываем соединение
     db.close
 
     insert_row_id
