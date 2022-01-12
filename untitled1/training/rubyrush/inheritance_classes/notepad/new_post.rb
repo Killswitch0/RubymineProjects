@@ -41,9 +41,9 @@ entry = Post.create(choices[choice])
 # Просим пользователя ввести пост (каким бы он ни был)
 entry.read_from_console
 
-id = entry.save_to_db
+rowid = entry.save_to_db
 
-puts "Ура! Запись сохранена! id = #{id}"
+puts "Ура! Запись сохранена! id = #{rowid}"
 
 
 

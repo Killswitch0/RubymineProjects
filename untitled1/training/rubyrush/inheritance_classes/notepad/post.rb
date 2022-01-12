@@ -47,9 +47,42 @@ class Post
       result = db.execute("SELECT * FROM posts WHERE rowid = ?", id )
 
       result = result[0] if result.is_a? Array
+
+      db.close
+
+      if result.empty?
+        puts "Такой #{id} не найден в базе"
+        nil
+      else
+        post = create(result['type'])
+
+        post.load_data(result)
+
+        post
+      end
     else
       #  2. вернуть таблицу записей
+      db.results_as_hash = false # настройка соединения к базе, он результаты из базы НЕ преобразует в Руби хэши
 
+      # формируем запрос в базу с нужными условиями
+      query = "SELECT rowid, * FROM posts "
+
+      query += "WHERE type = :type " unless type.nil? # если задан тип, надо добавить условие
+      query += "ORDER by rowid DESC " # и наконец сортировка - самые свежие в начале
+
+      query += "LIMIT :limit " unless limit.nil? # если задан лимит, надо добавить условие
+
+      # готовим запрос в базу, как плов :)
+      statement = db.prepare query
+
+      statement.bind_param('type', type) unless type.nil? # загружаем в запрос тип вместо плейсхолдера, добавляем лук :)
+      statement.bind_param('limit', limit) unless limit.nil? # загружаем лимит вместо плейсхолдера, добавляем морковь :)
+
+      result = statement.execute! #(query) # выполняем
+      statement.close
+      db.close
+
+      return result
     end
   end
 
@@ -108,5 +141,10 @@ class Post
       'type' => self.class.name,
       'created_at' => @created_at.to_s
     }
+  end
+
+  # получает на вход хэщ массив данных и должен заполнить свои поля
+  def load_data(data_hash)
+    @created_at = Date.parse(data_hash['created_at'])
   end
 end
