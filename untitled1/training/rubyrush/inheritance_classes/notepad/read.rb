@@ -35,7 +35,7 @@ if result.is_a? Post # показываем конкретный пост
 
 else # показываем таблицу результатов
 
-  print "| id\t| @type\t|  @created_at\t\t\t|  @text \t\t\t| @url\t\t| @due_date \t "
+  print "| id\t| @type\t|  @created_at\t\t\t|  @text \t\t\t| @url\t\t\t| @due_date \t "
 
   result.each do |row|
     puts

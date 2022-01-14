@@ -65,8 +65,4 @@ class ResultPrinter
   def print_viselitsa(errors)
     puts @status_image[errors]
   end
-
-
-
-
 end

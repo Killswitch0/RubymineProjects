@@ -42,16 +42,19 @@ class Post
     post_types[type].new
   end
 
+  # Находит в базе запись по идентификатору или массив записей
+  # из базы данных, который можно например показать в виде таблицы на экране
   def self.find(limit, type, id)
-    db = SQLite3::Database.open(@@SQLITE_DB_FILE)
+    db = SQLite3::Database.open(@@SQLITE_DB_FILE) # открываем "соединение" к базе SQLite
 
     #  1. конкретная запись
     if !id.nil?
-      db.results_as_hash = true
+      db.results_as_hash = true # настройка соединения к базе, он результаты из базы преобразует в Руби хэши
 
+      # выполняем наш запрос, он возвращает массив результатов, в нашем случае из одного элемента
       result = db.execute("SELECT * FROM posts WHERE rowid = ?", id )
 
-      result = result[0] if result.is_a? Array
+      result = result[0] if result.is_a? Array  # получаем единственный результат (если вернулся массив)
 
       db.close
 
@@ -59,11 +62,14 @@ class Post
         puts "Такой #{id} не найден в базе"
         nil
       else
+        # создаем с помощью нашего же метода create экземпляр поста,
+        # тип поста мы взяли из массива результатов [:type]
+        # номер этого типа в нашем массиве post_type нашли с помощью метода Array#find_index
         post = create(result['type'])
 
-        post.load_data(result)
+        post.load_data(result) # заполним этот пост содержимым
 
-        post
+        post # и вернем его
       end
     else
       #  2. вернуть таблицу записей
@@ -80,8 +86,8 @@ class Post
       # готовим запрос в базу, как плов :)
       statement = db.prepare query
 
-      statement.bind_param('type', type) unless type.nil? # загружаем в запрос тип вместо плейсхолдера, добавляем лук :)
-      statement.bind_param('limit', limit) unless limit.nil? # загружаем лимит вместо плейсхолдера, добавляем морковь :)
+      statement.bind_param('type', type) unless type.nil? # загружаем в запрос тип вместо плейсхолдера
+      statement.bind_param('limit', limit) unless limit.nil? # загружаем лимит вместо плейсхолдера
 
       result = statement.execute! #(query) # выполняем
       statement.close
