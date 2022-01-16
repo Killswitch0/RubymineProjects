@@ -24,7 +24,13 @@ OptionParser.new do |opt|
 
 end.parse!
 
-result = Post.find(options[:limit], options[:type], options[:id])
+result = if options[:id].nil?
+           # если id не передали, ищем все записи по параметрам
+           Post.find_all(options[:limit], options[:type])
+         else
+           # если передали - ищем только по id
+           Post.find_by_id(options[:id])
+         end
 
 if result.is_a? Post # показываем конкретный пост
   puts "Запись #{result.class.name}, id = #{options[:id]}"

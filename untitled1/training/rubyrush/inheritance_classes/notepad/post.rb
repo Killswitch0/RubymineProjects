@@ -42,59 +42,57 @@ class Post
     post_types[type].new
   end
 
-  # Находит в базе запись по идентификатору или массив записей
-  # из базы данных, который можно например показать в виде таблицы на экране
-  def self.find(limit, type, id)
+  # Находит в базе запись по идентификатору из базы данных,
+  # который можно например показать в виде таблицы на экране
+  def self.find_by_id(id)
     db = SQLite3::Database.open(@@SQLITE_DB_FILE) # открываем "соединение" к базе SQLite
+    db.results_as_hash = true # настройка соединения к базе, он результаты из базы преобразует в Руби хэши
 
-    #  1. конкретная запись
-    if !id.nil?
-      db.results_as_hash = true # настройка соединения к базе, он результаты из базы преобразует в Руби хэши
+    # выполняем наш запрос, он возвращает массив результатов, в нашем случае из одного элемента
+    result = db.execute("SELECT * FROM posts WHERE rowid = ?", id)
 
-      # выполняем наш запрос, он возвращает массив результатов, в нашем случае из одного элемента
-      result = db.execute("SELECT * FROM posts WHERE rowid = ?", id )
+    result = result[0] if result.is_a? Array # получаем единственный результат (если вернулся массив)
 
-      result = result[0] if result.is_a? Array  # получаем единственный результат (если вернулся массив)
+    db.close
 
-      db.close
-
-      if result.empty?
-        puts "Такой #{id} не найден в базе"
-        nil
-      else
-        # создаем с помощью нашего же метода create экземпляр поста,
-        # тип поста мы взяли из массива результатов [:type]
-        # номер этого типа в нашем массиве post_type нашли с помощью метода Array#find_index
-        post = create(result['type'])
-
-        post.load_data(result) # заполним этот пост содержимым
-
-        post # и вернем его
-      end
+    # создаем с помощью нашего же метода create экземпляр поста,
+    # тип поста мы взяли из массива результатов [:type]
+    # номер этого типа в нашем массиве post_type нашли с помощью метода Array#find_index
+    if result.empty?
+      puts "Такой #{id} не найден в базе"
     else
-      #  2. вернуть таблицу записей
-      db.results_as_hash = false # настройка соединения к базе, он результаты из базы НЕ преобразует в Руби хэши
+      post = create(result['type'])
+      post.load_data(result) # заполним этот пост содержимым
 
-      # формируем запрос в базу с нужными условиями
-      query = "SELECT rowid, * FROM posts "
-
-      query += "WHERE type = :type " unless type.nil? # если задан тип, надо добавить условие
-      query += "ORDER by rowid DESC " # и наконец сортировка - самые свежие в начале
-
-      query += "LIMIT :limit " unless limit.nil? # если задан лимит, надо добавить условие
-
-      # готовим запрос в базу, как плов :)
-      statement = db.prepare query
-
-      statement.bind_param('type', type) unless type.nil? # загружаем в запрос тип вместо плейсхолдера
-      statement.bind_param('limit', limit) unless limit.nil? # загружаем лимит вместо плейсхолдера
-
-      result = statement.execute! #(query) # выполняем
-      statement.close
-      db.close
-
-      return result
+      post # и вернем его
     end
+  end
+
+  # Метод find_all выводит всю таблицу записей из базы данных
+  # или все записи по параметру limit, type
+  def self.find_all(limit, type)
+    db = SQLite3::Database.open(@@SQLITE_DB_FILE)
+    db.results_as_hash = false
+
+    # формируем запрос в базу с нужными условиями
+    query = "SELECT rowid, * FROM posts "
+
+    query += "WHERE type = :type " unless type.nil? # если задан тип, надо добавить условие
+    query += "ORDER by rowid DESC " # и наконец сортировка - самые свежие в начале
+
+    query += "LIMIT :limit " unless limit.nil? # если задан лимит, надо добавить условие
+
+    # готовим запрос в базу
+    statement = db.prepare query
+
+    statement.bind_param('type', type) unless type.nil? # загружаем в запрос тип вместо плейсхолдера
+    statement.bind_param('limit', limit) unless limit.nil? # загружаем лимит вместо плейсхолдера
+
+    result = statement.execute! #(query) # выполняем
+    statement.close
+    db.close
+
+    result
   end
 
   def initialize
@@ -157,7 +155,7 @@ class Post
     }
   end
 
-  # получает на вход хэщ массив данных и должен заполнить свои поля
+  # получает на вход хэш массив данных и должен заполнить свои поля
   def load_data(data_hash)
     @created_at = Date.parse(data_hash['created_at'])
   end

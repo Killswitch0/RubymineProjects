@@ -60,5 +60,6 @@ class Task < Post
 
     # теперь прописываем свое специфичное поле
     @due_date = Date.parse(data_hash['due_date'])
+    @text = data_hash['text']
   end
 end
