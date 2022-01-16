@@ -35,9 +35,7 @@ result = if options[:id].nil?
 if result.is_a? Post # показываем конкретный пост
   puts "Запись #{result.class.name}, id = #{options[:id]}"
   # выведем весь пост на экран и закроемся
-  result.to_strings.each do |line|
-    puts line
-  end
+  result.to_strings.each { |line| puts line }
 
 else # показываем таблицу результатов
 
