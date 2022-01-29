@@ -14,6 +14,16 @@ class Product
     product_types[type_index].new
   end
 
+  def self.showcase(products)
+    puts "*Какой из списка товаров хотите купить?*\n\n"
+
+    products.each_with_index do |p, i|
+      puts "#{i}: #{p}"
+    end
+
+    puts "\n*[X] - покинуть магазин*\n\n"
+  end
+
   def read_from_console
     # to do
   end
@@ -25,18 +35,18 @@ class Product
     book_file_path = current_path + '/data/book'
 
     prod_path = if self.class.name.to_s == Film.to_s
-                  "#{film_file_path}/#{Time.now.strftime('%Y.%m.%d-%M:%S')}.txt"
+                  "#{film_file_path}/#{Time.now.strftime('%Y.%m.%d-%H:%M')}.txt"
                 elsif self.class.name.to_s == Book.to_s
-                  "#{book_file_path}/#{Time.now.strftime('%Y.%m.%d-%M:%S')}.txt"
+                  "#{book_file_path}/#{Time.now.strftime('%Y.%m.%d-%H:%M')}.txt"
                 end
 
     prod_path
   end
 
-  def save
+  def save_to_txt
     file = File.new(file_path, "w:UTF-8")
 
-    to_s.each { |l| file.puts(l)}
+    arr_to_save.each { |l| file.puts(l)}
 
     file.close
   end
@@ -45,8 +55,16 @@ class Product
     "#{@price} грн. (осталось: #{@amount} шт.)"
   end
 
+  def arr_to_save
+    # to do
+  end
+
   def update(options)
     @price = options[:price] if options[:price]
     @amount = options[:amount] if options[:amount]
+  end
+
+  def self.read_from_file(file_path)
+    # to do
   end
 end

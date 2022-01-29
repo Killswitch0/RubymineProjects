@@ -1,4 +1,8 @@
+require_relative 'module'
+
 class Film < Product
+  include FilmInstVar
+
   attr_accessor :title,
                 :director,
                 :genre,
@@ -15,8 +19,6 @@ class Film < Product
 
   def to_s
     "Фильм: #{@title}. Жанр: #{@genre}. Год: #{@year}. Режиссер: #{@director}. #{super}"
-
-    [@title, @genre, @year, @director, @price, @amount]
   end
 
   def read_from_console

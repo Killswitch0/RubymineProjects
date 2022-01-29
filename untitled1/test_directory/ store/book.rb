@@ -1,4 +1,8 @@
+require_relative 'module'
+
 class Book < Product
+  include BookInstVer
+
   attr_accessor :name,
                 :author,
                 :genre,
@@ -15,8 +19,6 @@ class Book < Product
 
   def to_s
     "Книга: #{@name}. Жанр: #{@genre}. Год: #{@year}. Режиссер: #{@author}. #{super}"
-
-    [@name, @genre, @year, @author, @price, @amount]
   end
 
   def read_from_console

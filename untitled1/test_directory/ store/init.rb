@@ -1,6 +1,7 @@
 require_relative 'product'
 require_relative 'film'
 require_relative 'book'
+require_relative 'product_collection'
 
 
 film = Film.new(title: 'Дневник Памяти',
@@ -56,9 +57,23 @@ new_product = Product.create(choice)
 
 new_product.read_from_console
 
-new_product.save
+new_product.save_to_txt
 
 puts "Новый продукт добавлен!"
+
+puts
+puts
+
+collection = ProductCollection.from_dir(File.dirname(__FILE__ ) + '/data')
+
+collection.sort!(by: :price, order: :asc)
+
+collection.to_a.each { |product| puts product }
+
+
+
+
+
 
 
 
